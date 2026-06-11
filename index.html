@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>심부름 — 오늘 바로, 어디든 빠르게</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --brand: #FF4B2B;
+      --brand-light: #FFF2F0;
+      --text: #111111;
+      --sub: #888888;
+      --bg: #FFFFFF;
+      --gray: #F7F7F8;
+      --border: #EEEEEE;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 40px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+    .logo {
+      font-size: 20px; font-weight: 900; color: var(--brand);
+      letter-spacing: -0.5px;
+    }
+    .nav-badge {
+      font-size: 12px; font-weight: 700;
+      background: var(--brand-light); color: var(--brand);
+      padding: 5px 12px; border-radius: 20px;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 13px; font-weight: 700;
+      color: var(--brand);
+      background: var(--brand-light);
+      padding: 6px 16px; border-radius: 20px;
+      margin-bottom: 28px;
+      letter-spacing: 0.5px;
+    }
+    .hero-title {
+      font-size: clamp(42px, 8vw, 80px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -2px;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .hero-title span { color: var(--brand); }
+    .hero-desc {
+      font-size: 18px; color: var(--sub);
+      max-width: 480px; line-height: 1.7;
+      margin-bottom: 48px;
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--brand); color: #fff;
+      font-size: 16px; font-weight: 700;
+      padding: 16px 36px; border-radius: 14px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .hero-cta:hover { opacity: 0.85; }
+    .hero-meta {
+      margin-top: 20px;
+      font-size: 13px; color: #bbb;
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 40px; height: 3px;
+      background: var(--brand);
+      margin: 0 auto 48px;
+      border-radius: 2px;
+    }
+
+    /* SECTION */
+    section {
+      padding: 100px 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 12px; font-weight: 700;
+      color: var(--brand); letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 900; letter-spacing: -1px;
+      line-height: 1.2; margin-bottom: 48px;
+    }
+
+    /* HOW IT WORKS */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .step {
+      background: var(--gray);
+      border-radius: 20px;
+      padding: 32px 28px;
+    }
+    .step-num {
+      font-size: 13px; font-weight: 700;
+      color: var(--brand); margin-bottom: 16px;
+    }
+    .step-icon { font-size: 32px; margin-bottom: 12px; }
+    .step-title { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+    .step-desc { font-size: 14px; color: var(--sub); line-height: 1.6; }
+
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .feature {
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 32px 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .feature:hover {
+      border-color: var(--brand);
+      transform: translateY(-2px);
+    }
+    .feature-icon { font-size: 28px; margin-bottom: 16px; }
+    .feature-title { font-size: 17px; font-weight: 800; margin-bottom: 8px; }
+    .feature-desc { font-size: 14px; color: var(--sub); line-height: 1.6; }
+
+    /* COMING SOON */
+    .coming-soon-box {
+      background: var(--text);
+      color: #fff;
+      border-radius: 28px;
+      padding: 64px 48px;
+      text-align: center;
+    }
+    .coming-soon-box .section-label { color: #FF7A5A; }
+    .coming-soon-box .section-title { color: #fff; margin-bottom: 16px; }
+    .coming-soon-desc {
+      font-size: 16px; color: rgba(255,255,255,0.6);
+      margin-bottom: 36px; line-height: 1.7;
+    }
+    .notify-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--brand); color: #fff;
+      font-size: 15px; font-weight: 700;
+      padding: 14px 32px; border-radius: 12px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .notify-btn:hover { opacity: 0.85; }
+
+    /* CONTACT */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .contact-item {
+      background: var(--gray);
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .contact-label { font-size: 12px; color: var(--sub); font-weight: 700; margin-bottom: 8px; }
+    .contact-value { font-size: 15px; font-weight: 700; color: var(--text); }
+    .contact-value a { color: var(--brand); text-decoration: none; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+      font-size: 13px; color: #bbb;
+      line-height: 1.8;
+    }
+    footer strong { color: var(--sub); }
+
+    @media (max-width: 600px) {
+      nav { padding: 16px 20px; }
+      .coming-soon-box { padding: 48px 28px; }
+      section { padding: 72px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="logo">심부름</span>
+    <span class="nav-badge">서비스 출시 준비 중</span>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="hero-eyebrow">🚀 서울 노원구 · 당일배송 플랫폼</span>
+    <h1 class="hero-title">오늘 바로,<br><span>어디든</span> 빠르게</h1>
+    <p class="hero-desc">중고거래 물건부터 소중한 물품까지.<br>동네 기사님이 당일에 픽업해서 배송해드립니다.</p>
+    <a href="#contact" class="hero-cta">📩 출시 알림 받기</a>
+    <p class="hero-meta">곧 앱스토어 · 구글플레이에서 만나요</p>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section id="about">
+    <p class="section-label">서비스 소개</p>
+    <h2 class="section-title">이렇게 작동해요</h2>
+    <div class="divider"></div>
+    <div class="steps">
+      <div class="step">
+        <p class="step-num">STEP 01</p>
+        <div class="step-icon">📍</div>
+        <h3 class="step-title">주소 입력</h3>
+        <p class="step-desc">픽업지와 배송지 주소를 입력하고 물건 크기를 선택해요.</p>
+      </div>
+      <div class="step">
+        <p class="step-num">STEP 02</p>
+        <div class="step-icon">💰</div>
+        <h3 class="step-title">배송비 설정</h3>
+        <p class="step-desc">원하는 배송비를 직접 설정해요. 높을수록 빠르게 매칭돼요.</p>
+      </div>
+      <div class="step">
+        <p class="step-num">STEP 03</p>
+        <div class="step-icon">🛵</div>
+        <h3 class="step-title">기사님 매칭</h3>
+        <p class="step-desc">주변 기사님이 수락하면 바로 픽업을 시작해요.</p>
+      </div>
+      <div class="step">
+        <p class="step-num">STEP 04</p>
+        <div class="step-icon">✅</div>
+        <h3 class="step-title">배송 완료</h3>
+        <p class="step-desc">배송 완료 사진을 문자로 받아 확인할 수 있어요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" style="background: var(--gray); max-width: 100%; padding: 100px 24px;">
+    <div style="max-width: 960px; margin: 0 auto;">
+      <p class="section-label">주요 기능</p>
+      <h2 class="section-title">심부름만의 특징</h2>
+      <div class="divider"></div>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3 class="feature-title">당일 배송</h3>
+          <p class="feature-desc">주문 즉시 주변 기사님과 매칭. 오늘 보내고 오늘 받아요.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📸</div>
+          <h3 class="feature-title">사진 확인</h3>
+          <p class="feature-desc">픽업·배송 완료 사진을 문자로 받아 물건 상태를 확인해요.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📈</div>
+          <h3 class="feature-title">배송비 자동인상</h3>
+          <p class="feature-desc">매칭이 안 되면 설정한 금액까지 자동으로 올려 재시도해요.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔒</div>
+          <h3 class="feature-title">안심 거래</h3>
+          <p class="feature-desc">승인된 기사님만 배송 가능. 픽업·배송 전 과정을 추적해요.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">💳</div>
+          <h3 class="feature-title">간편 결제</h3>
+          <p class="feature-desc">카카오페이·네이버페이·카드 등 다양한 결제 수단을 지원해요.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🗺️</div>
+          <h3 class="feature-title">실시간 위치</h3>
+          <p class="feature-desc">기사님의 이동 경로를 앱에서 실시간으로 확인할 수 있어요.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMING SOON -->
+  <section>
+    <div class="coming-soon-box">
+      <p class="section-label">출시 예정</p>
+      <h2 class="section-title">2026년 여름,<br>서울 노원구에서 시작합니다</h2>
+      <p class="coming-soon-desc">현재 서비스 출시를 준비 중이에요.<br>출시 알림을 받고 가장 먼저 이용해보세요.</p>
+      <a href="mailto:simburoomgo@gmail.com" class="notify-btn">📩 출시 알림 신청</a>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="section-label">고객센터 · 연락처</p>
+    <h2 class="section-title">궁금한 점이 있으신가요?</h2>
+    <div class="divider"></div>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <p class="contact-label">이메일</p>
+        <p class="contact-value"><a href="mailto:simburoomgo@gmail.com">simburoomgo@gmail.com</a></p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label">카카오톡 채널</p>
+        <p class="contact-value"><a href="http://pf.kakao.com/_WxdmGX/chat" target="_blank">심부름 채널 바로가기 →</a></p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label">서비스 지역</p>
+        <p class="contact-value">서울특별시 노원구 (시작)</p>
+      </div>
+      <div class="contact-item">
+        <p class="contact-label">운영 시간</p>
+        <p class="contact-value">출시 후 공지 예정</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <strong>심부름</strong><br>
+    대표자: 박상현 · 사업자등록번호: 475-16-02902<br>
+    통신판매업신고: 신청 예정 · 사업장: 서울특별시 노원구<br><br>
+    © 2026 심부름. All rights reserved.
+  </footer>
+
+</body>
+</html>
