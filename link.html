@@ -96,7 +96,7 @@ async function init() {
 
   const { data, error } = await sb
     .from('orders')
-    .select('id, order_type, orderer_nickname, status, delivery_lat, delivery_lng, buyer_id')
+    .select('id, order_type, orderer_nickname, status, delivery_lat, delivery_lng, buyer_id, short_code')
     .eq('short_code', code)
     .maybeSingle();
 
@@ -304,7 +304,7 @@ async function handleSubmit() {
         distance_km: distance,
         link_completed_at: new Date().toISOString(),
         status: 'waiting',
-      }).eq('short_code', order.short_code ?? code);
+      }).eq('short_code', order.short_code);
     } else {
       await sb.from('orders').update({
         buyer_address: fullAddr,
@@ -314,7 +314,7 @@ async function handleSubmit() {
         delivery_dong: dong,
         link_completed_at: new Date().toISOString(),
         status: 'waiting',
-      }).eq('short_code', order.short_code ?? code);
+      }).eq('short_code', order.short_code);
     }
 
     // dispatch 호출 (주문자 푸시는 dispatch 내부에서 처리)
