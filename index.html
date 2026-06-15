@@ -365,8 +365,9 @@
     <div class="charge-info">
       💡 충전금은 앱 내 잔액으로 적립되며 배송비 결제 시 자동 차감됩니다.<br>
       미사용 충전금은 언제든지 환불 신청 가능합니다. (고객센터 문의)<br>
-      결제대행: 토스페이먼츠 · 사업자등록번호: 475-16-02902
+      결제대행: 나이스페이먼츠 · 사업자등록번호: 475-16-02902
     </div>
+    <button onclick="openPayment()" style="width:100%;height:56px;background:var(--red);color:#fff;border:none;border-radius:14px;font-size:17px;font-weight:700;margin-top:20px;cursor:pointer;">💳 충전하기</button>
   </div>
 </section>
 
@@ -541,10 +542,36 @@
 </footer>
 
 </body>
+<script src="https://cdn.nicepay.co.kr/nicepay-sdk/v1.0/nicepay.min.js"></script>
 <script>
 function selectCharge(el){
   document.querySelectorAll('.charge-card').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');
+}
+
+function getSelectedAmount() {
+  const selected = document.querySelector('.charge-card.selected .charge-amount');
+  const custom = document.querySelector('.charge-input').value;
+  if (custom && parseInt(custom) >= 1000) return parseInt(custom);
+  if (!selected) return 20000;
+  const text = selected.textContent.trim();
+  const map = {'1만원':10000,'2만원':20000,'5만원':50000,'10만원':100000};
+  return map[text] || 20000;
+}
+
+function openPayment() {
+  const amount = getSelectedAmount();
+  const orderId = 'SIMBUROOM_' + Date.now();
+  NICEPAY.requestPay({
+    clientId: 'R2_6ab67689c6a8483ea029cddc21e96cbf',
+    method: 'card',
+    orderId: orderId,
+    amount: amount,
+    goodsName: '심부름 잔액 충전',
+    returnUrl: 'https://www.simburoom.kr',
+    failUrl: 'https://www.simburoom.kr',
+    mallReserved: JSON.stringify({ type: 'charge' }),
+  });
 }
 </script>
 </html>
