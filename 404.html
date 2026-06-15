@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+  // /p/{code} 형태의 URL을 index.html로 리다이렉트
+  const path = window.location.pathname;
+  const m = path.match(/\/p\/([^\/?#]+)/);
+  if (m) {
+    window.location.replace('/link.html?code=' + m[1]);
+  } else {
+    window.location.replace('/');
+  }
+</script>
+</head>
+<body></body>
+</html>
