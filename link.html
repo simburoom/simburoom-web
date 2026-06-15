@@ -72,6 +72,7 @@ let selectedItem = null;   // 선택된 카카오 주소 doc
 let photoFile = null;      // buy: 물건 사진
 let consentChecked = false;
 let submitting = false;
+let code = '';
 
 const app = document.getElementById('app');
 const esc = (s) => (s == null ? '' : String(s)).replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -91,7 +92,7 @@ function getShortCode() {
 }
 
 async function init() {
-  const code = getShortCode();
+  code = getShortCode();
   if (!code) { renderError('잘못된 접근이에요.'); return; }
 
   const { data, error } = await sb
