@@ -304,7 +304,7 @@ async function handleSubmit() {
         distance_km: distance,
         link_completed_at: new Date().toISOString(),
         status: 'waiting',
-      }).eq('id', order.id);
+      }).eq('short_code', order.short_code ?? code);
     } else {
       await sb.from('orders').update({
         buyer_address: fullAddr,
@@ -314,7 +314,7 @@ async function handleSubmit() {
         delivery_dong: dong,
         link_completed_at: new Date().toISOString(),
         status: 'waiting',
-      }).eq('id', order.id);
+      }).eq('short_code', order.short_code ?? code);
     }
 
     // dispatch 호출 (주문자 푸시는 dispatch 내부에서 처리)
