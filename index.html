@@ -15,7 +15,8 @@
   body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;color:var(--ink);background:var(--canvas);line-height:1.5}
 
   nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--hairline);height:60px;display:flex;align-items:center;padding:0 24px;justify-content:space-between}
-  .nav-logo{font-size:20px;font-weight:700;color:var(--red);display:flex;align-items:center;gap:8px}
+  .nav-logo{font-size:20px;font-weight:700;color:var(--red);display:flex;align-items:center;gap:8px;text-decoration:none}
+  .nav-logo svg{flex-shrink:0}
   .nav-links{display:flex;gap:24px}
   .nav-links a{font-size:14px;color:var(--muted);text-decoration:none;font-weight:500;transition:color 0.15s}
   .nav-links a:hover{color:var(--ink)}
@@ -159,7 +160,24 @@
 <body>
 
 <nav>
-  <div class="nav-logo">🛵 심부름</div>
+  <div class="nav-logo">
+    <svg width="36" height="28" viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- 왼쪽 집 -->
+      <path d="M4 14L9 9L14 14V22H4V14Z" fill="#FF4B2B"/>
+      <rect x="6" y="17" width="3" height="5" fill="white"/>
+      <!-- 오른쪽 집 -->
+      <path d="M22 14L27 9L32 14V22H22V14Z" fill="#FF4B2B"/>
+      <rect x="24" y="17" width="3" height="5" fill="white"/>
+      <!-- 박스 -->
+      <rect x="15" y="3" width="6" height="6" rx="1" fill="#FF4B2B"/>
+      <line x1="15" y1="6" x2="21" y2="6" stroke="white" stroke-width="0.8"/>
+      <line x1="18" y1="3" x2="18" y2="9" stroke="white" stroke-width="0.8"/>
+      <!-- 곡선 화살표 -->
+      <path d="M10 11 Q18 2 26 11" stroke="#FF4B2B" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <polygon points="26,11 23,8 28,8" fill="#FF4B2B"/>
+    </svg>
+    심부름
+  </div>
   <div class="nav-links">
     <a href="#pain">불편함</a>
     <a href="#how">이용방법</a>
@@ -173,6 +191,23 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
+    <div style="margin-bottom:20px">
+      <svg width="80" height="62" viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 왼쪽 집 -->
+        <path d="M4 14L9 9L14 14V22H4V14Z" fill="white"/>
+        <rect x="6" y="17" width="3" height="5" fill="#FF4B2B"/>
+        <!-- 오른쪽 집 -->
+        <path d="M22 14L27 9L32 14V22H22V14Z" fill="white"/>
+        <rect x="24" y="17" width="3" height="5" fill="#FF4B2B"/>
+        <!-- 박스 -->
+        <rect x="15" y="3" width="6" height="6" rx="1" fill="white"/>
+        <line x1="15" y1="6" x2="21" y2="6" stroke="#FF4B2B" stroke-width="0.8"/>
+        <line x1="18" y1="3" x2="18" y2="9" stroke="#FF4B2B" stroke-width="0.8"/>
+        <!-- 곡선 화살표 -->
+        <path d="M10 11 Q18 2 26 11" stroke="white" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <polygon points="26,11 23,8 28,8" fill="white"/>
+      </svg>
+    </div>
     <div class="hero-tag">서울 노원구 · 당일배송 플랫폼</div>
     <h1>오늘 바로,<br>어디든 빠르게</h1>
     <p>음식배달처럼 — 음식점 대신 집과 집 사이를 연결하는<br>당일 퀵배송 중개 서비스</p>
@@ -449,9 +484,9 @@
     <div class="pdf-wrapper">
       <div class="pdf-toolbar">
         <div class="pdf-toolbar-title">📄 심부름 서비스 소개서</div>
-        <a class="pdf-download-btn" href="simburoom-intro.pdf" download>⬇ 다운로드</a>
+        <a class="pdf-download-btn" href="심부름_서비스소개서.pdf" download>⬇ 다운로드</a>
       </div>
-      <iframe class="pdf-embed" src="simburoom-intro.pdf" type="application/pdf"></iframe>
+      <iframe class="pdf-embed" src="심부름_서비스소개서.pdf" type="application/pdf"></iframe>
     </div>
   </div>
 </section>
@@ -460,8 +495,21 @@
 
 <footer>
   <div class="footer-inner">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+      <svg width="32" height="25" viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 14L9 9L14 14V22H4V14Z" fill="#FF4B2B"/>
+        <rect x="6" y="17" width="3" height="5" fill="white"/>
+        <path d="M22 14L27 9L32 14V22H22V14Z" fill="#FF4B2B"/>
+        <rect x="24" y="17" width="3" height="5" fill="white"/>
+        <rect x="15" y="3" width="6" height="6" rx="1" fill="#FF4B2B"/>
+        <line x1="15" y1="6" x2="21" y2="6" stroke="white" stroke-width="0.8"/>
+        <line x1="18" y1="3" x2="18" y2="9" stroke="white" stroke-width="0.8"/>
+        <path d="M10 11 Q18 2 26 11" stroke="#FF4B2B" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+        <polygon points="26,11 23,8 28,8" fill="#FF4B2B"/>
+      </svg>
+      <strong style="font-size:16px;color:#222">심부름</strong>
+    </div>
     <div class="footer-info">
-      <strong>심부름</strong><br>
       대표자: 박상현 · 사업자등록번호: 475-16-02902<br>
       통신판매업신고: 신청 예정 · 사업장: 서울특별시 노원구<br>
       이메일: simburoomgo@gmail.com
