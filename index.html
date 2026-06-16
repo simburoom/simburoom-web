@@ -694,7 +694,7 @@
 </div>
 
 </body>
-<script src="https://cdn.nicepay.co.kr/nicepay-sdk/v1.0/nicepay.min.js"></script>
+<script src="https://web.nicepay.co.kr/v3/webstd/js/nicepay-3.0.js"></script>
 <script>
 function openModal(id){document.getElementById('modal-'+id).classList.add('open');document.body.style.overflow='hidden'}
 function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow=''}
@@ -718,15 +718,16 @@ function getSelectedAmount() {
 function openPayment() {
   const amount = getSelectedAmount();
   const orderId = 'SIMBUROOM_' + Date.now();
-  NICEPAY.requestPay({
+  AUTHNICE.requestPay({
     clientId: 'R2_6ab67689c6a8483ea029cddc21e96cbf',
     method: 'card',
     orderId: orderId,
     amount: amount,
     goodsName: '심부름 잔액 충전',
-    returnUrl: 'https://www.simburoom.kr',
-    failUrl: 'https://www.simburoom.kr',
-    mallReserved: JSON.stringify({ type: 'charge' }),
+    returnUrl: 'https://sppvrikqjufrdsrfcokx.supabase.co/functions/v1/nicepay-callback',
+    fnError: function(result) {
+      alert('결제 오류: ' + result.errorMsg);
+    }
   });
 }
 </script>
