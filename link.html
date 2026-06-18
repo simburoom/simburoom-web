@@ -40,6 +40,17 @@
   .file-btn.has { border-style: solid; border-color: var(--brand); color: var(--brand); font-weight: 700; }
   .photo-preview { width: 100%; border-radius: 12px; margin-top: 10px; }
 
+  .dm-row { display: flex; gap: 10px; margin-top: 8px; }
+  .dm-card { flex: 1; background: #f7f7f8; border: 1.5px solid #eee; border-radius: 12px; padding: 16px 10px; text-align: center; cursor: pointer; position: relative; }
+  .dm-card .dm-emoji { font-size: 28px; }
+  .dm-card .dm-text { font-size: 14px; font-weight: 700; color: #333; margin-top: 6px; }
+  .dm-card.on { border-color: var(--brand); background: #fff5f3; }
+  .dm-card.on .dm-text { color: var(--brand); }
+  .dm-card .dm-check { display: none; position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; border-radius: 50%; background: var(--brand); color: #fff; font-size: 12px; align-items: center; justify-content: center; }
+  .dm-card.on .dm-check { display: flex; }
+  textarea.memo { width: 100%; background: #f7f7f8; border: 1.5px solid #eee; border-radius: 12px; padding: 14px 16px; font-size: 15px; color: #1a1a1a; resize: none; font-family: inherit; }
+  textarea.memo:focus { outline: none; border-color: var(--brand); background: #fff; }
+
   .consent { margin-top: 20px; }
   .consent-row { display: flex; align-items: center; gap: 10px; cursor: pointer; }
   .checkbox { width: 24px; height: 24px; border-radius: 7px; border: 2px solid #ddd; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #fff; flex-shrink: 0; }
@@ -70,6 +81,7 @@ const sb = supabase.createClient(SUPABASE_URL, ANON_KEY);
 let order = null;
 let selectedItem = null;   // 선택된 카카오 주소 doc
 let photoFile = null;      // buy: 물건 사진
+let selectedDeliveryType = null;  // 수령 방법: 'door_hanger' | 'direct'
 let consentChecked = false;
 let submitting = false;
 let code = '';
@@ -147,9 +159,26 @@ function renderForm() {
     <label class="fl">상세주소</label>
     <input type="text" id="detail" placeholder="동/호수 등">
 
+    <label class="fl">수령 방법 <span style="color:var(--brand)">*</span></label>
+    <div class="dm-row">
+      <div class="dm-card" data-type="door_hanger">
+        <div class="dm-check">✓</div>
+        <div class="dm-emoji">🚪</div>
+        <div class="dm-text">문고리걸기</div>
+      </div>
+      <div class="dm-card" data-type="direct">
+        <div class="dm-check">✓</div>
+        <div class="dm-emoji">🤝</div>
+        <div class="dm-text">직접전달</div>
+      </div>
+    </div>
+
+    <label class="fl">${isBuy ? '기사 요청사항' : '배송 요청사항'}</label>
+    <textarea class="memo" id="memo" rows="2" maxlength="100" placeholder="예: 문 앞에 놔주세요, 조심히 다뤄주세요"></textarea>
+
     ${isBuy ? `
     <label class="fl">물건 사진 <span style="color:var(--brand)">*</span></label>
-    <label class="file-btn" id="file-label" for="photo">📷 사진 업로드</label>
+    <div class="file-btn" id="file-label">📷 사진 업로드</div>
     <input type="file" id="photo" accept="image/*" style="display:none;">
     <img id="photo-preview" class="photo-preview" style="display:none;">
     ` : ''}
@@ -185,8 +214,28 @@ function renderForm() {
     d.style.display = d.style.display === 'block' ? 'none' : 'block';
   };
 
+  // 수령 방법 선택
+  document.querySelectorAll('.dm-card').forEach(card => {
+    card.onclick = () => {
+      selectedDeliveryType = card.dataset.type;
+      document.querySelectorAll('.dm-card').forEach(c => c.classList.remove('on'));
+      card.classList.add('on');
+      updateButton();
+    };
+  });
+
   if (isBuy) {
     const fileInput = document.getElementById('photo');
+    // 사진 클릭 시 수령 방법 확인
+    document.getElementById('file-label').onclick = () => {
+      if (!selectedDeliveryType) { alert('먼저 수령 방법을 선택해주세요'); return; }
+      if (selectedDeliveryType === 'door_hanger') {
+        alert('문고리에 물건을 걸어두신 후 사진을 찍어주세요 📦');
+      } else {
+        alert('포장 후 물건 사진을 찍어주세요 📦');
+      }
+      fileInput.click();
+    };
     fileInput.addEventListener('change', () => {
       const f = fileInput.files[0];
       if (!f) return;
@@ -252,7 +301,7 @@ function updateButton() {
   const nickname = document.getElementById('nickname')?.value.trim();
   const phone = document.getElementById('phone')?.value.trim();
   const isBuy = order.order_type === 'buy';
-  let ok = nickname && phone && phone.length >= 10 && selectedItem && consentChecked;
+  let ok = nickname && phone && phone.length >= 10 && selectedItem && consentChecked && selectedDeliveryType;
   if (isBuy) ok = ok && !!photoFile;
   document.getElementById('submit-btn').disabled = !ok;
 }
@@ -265,7 +314,8 @@ async function handleSubmit() {
   const nickname = document.getElementById('nickname').value.trim();
   const phone = document.getElementById('phone').value.trim();
   const detail = document.getElementById('detail').value.trim();
-  if (!nickname || !phone || phone.length < 10 || !selectedItem || !consentChecked || (isBuy && !photoFile)) {
+  const memo = document.getElementById('memo')?.value.trim() || '';
+  if (!nickname || !phone || phone.length < 10 || !selectedItem || !consentChecked || !selectedDeliveryType || (isBuy && !photoFile)) {
     alert('모든 필수 항목을 입력해주세요.');
     return;
   }
@@ -303,6 +353,8 @@ async function handleSubmit() {
         pickup_dong: dong,
         seller_item_photo_url: photoUrl,
         distance_km: distance,
+        sender_delivery_type: selectedDeliveryType,
+        sender_memo: memo,
         link_completed_at: new Date().toISOString(),
         status: 'waiting',
       }).eq('short_code', order.short_code);
@@ -313,6 +365,8 @@ async function handleSubmit() {
         delivery_lat: lat,
         delivery_lng: lng,
         delivery_dong: dong,
+        receiver_delivery_type: selectedDeliveryType,
+        receiver_memo: memo,
         link_completed_at: new Date().toISOString(),
         status: 'waiting',
       }).eq('short_code', order.short_code);
