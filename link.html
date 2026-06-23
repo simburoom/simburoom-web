@@ -355,6 +355,7 @@ async function handleSubmit() {
         distance_km: distance,
         sender_delivery_type: selectedDeliveryType,
         sender_memo: memo,
+        counterpart_nickname: nickname,
         link_completed_at: new Date().toISOString(),
         status: 'waiting',
       }).eq('short_code', order.short_code);
@@ -367,6 +368,7 @@ async function handleSubmit() {
         delivery_dong: dong,
         receiver_delivery_type: selectedDeliveryType,
         receiver_memo: memo,
+        counterpart_nickname: nickname,
         link_completed_at: new Date().toISOString(),
         status: 'waiting',
       }).eq('short_code', order.short_code);
