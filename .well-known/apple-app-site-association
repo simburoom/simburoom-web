@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "AT8BZV2DX3.com.simburoom.app",
+        "paths": ["/link.html*", "/link/*"]
+      }
+    ]
+  }
+}
