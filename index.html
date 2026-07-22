@@ -140,25 +140,6 @@
   .pdf-download-btn:hover{background:var(--red-active)}
   .pdf-embed{width:100%;height:680px;border:none;display:block}
  
-  /* MODAL */
-  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;padding:20px}
-  .modal-overlay.open{display:flex}
-  .modal-box{background:#fff;border-radius:16px;max-width:640px;width:100%;max-height:80vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.2)}
-  .modal-header{padding:20px 24px 16px;border-bottom:1px solid var(--hairline);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
-  .modal-title{font-size:17px;font-weight:700;color:var(--ink)}
-  .modal-close{width:32px;height:32px;border-radius:50%;border:none;background:var(--surf-strong);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
-  .modal-close:hover{background:var(--hairline)}
-  .modal-body{padding:20px 24px;overflow-y:auto;font-size:13px;color:var(--body);line-height:1.8;flex:1}
-  .modal-body h3{font-size:14px;font-weight:700;color:var(--ink);margin:18px 0 6px}
-  .modal-body h3:first-child{margin-top:0}
-  .modal-body p{margin-bottom:8px}
-  .modal-body ul{padding-left:18px;margin-bottom:8px}
-  .modal-body ul li{margin-bottom:4px}
-  .modal-footer{padding:16px 24px;border-top:1px solid var(--hairline);flex-shrink:0;text-align:right}
-  .modal-footer-note{font-size:11px;color:var(--muted);margin-bottom:10px}
-  .modal-confirm{background:var(--red);color:#fff;border:none;padding:10px 28px;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer}
-  .modal-confirm:hover{background:var(--red-active)}
- 
   /* FOOTER */
   footer{background:var(--canvas);border-top:1px solid var(--hairline);padding:40px 24px}
   .footer-inner{max-width:1040px;margin:0 auto}
@@ -493,169 +474,17 @@
       </div>
     </div>
     <div class="footer-links">
-      <a href="#" onclick="openModal('terms');return false;">이용약관</a>
-      <a href="#" onclick="openModal('privacy');return false;">개인정보처리방침</a>
-      <a href="#" onclick="openModal('location');return false;">위치정보 수집 동의</a>
+      <a href="terms.html">이용약관</a>
+      <a href="privacy.html">개인정보처리방침</a>
+      <a href="location.html">위치정보 수집 동의</a>
     </div>
     <div style="margin-top:20px;font-size:11px;color:#bbb">© 2026 심부름. All rights reserved.</div>
   </div>
 </footer>
  
-<!-- 이용약관 모달 -->
-<div class="modal-overlay" id="modal-terms" onclick="closeModalOutside(event,'modal-terms')">
-  <div class="modal-box">
-    <div class="modal-header">
-      <div class="modal-title">이용약관</div>
-      <button class="modal-close" onclick="closeModal('modal-terms')">✕</button>
-    </div>
-    <div class="modal-body">
-      <h3>제1조 목적 및 정의</h3>
-      <p>① 심부름은 개인 간 물건 빠른 퀵배송 중개 플랫폼입니다.</p>
-      <p>② 회사는 직접 배송하지 않으며 이용자-기사 연결 중개자입니다.</p>
-      <p>③ 만 14세 미만 이용 불가. 만 14세~18세 미만은 법정대리인 동의 필수.</p>
-      <p>④ 서비스 도메인: simburoom.kr</p>
-      <h3>제2조 약관의 효력 및 변경</h3>
-      <p>① 본 약관은 서비스 화면에 게시하거나 이용자에게 공지함으로써 효력이 발생합니다.</p>
-      <p>② 약관 변경 시 최소 7일 전 앱 내 공지 또는 카카오톡 채널을 통해 고지합니다.</p>
-      <p>③ 변경된 약관에 동의하지 않을 경우 서비스 이용을 중단하고 탈퇴할 수 있습니다.</p>
-      <h3>제3조 배송 불가 물품</h3>
-      <ul>
-        <li>현금 / 귀금속 / 유가증권 / 신분증 / 여권</li>
-        <li>동물 / 식물</li>
-        <li>화약 / 폭발물 / 인화성물질</li>
-        <li>마약류 / 불법물품</li>
-        <li>세변합 140cm 초과 또는 20kg 초과 물품</li>
-      </ul>
-      <h3>제4조 결제 및 환불</h3>
-      <p>결제: 나이스페이먼츠 (신용카드 일시불 전용)</p>
-      <p>카드결제를 통한 구매 건의 환불은 원칙적으로 카드 매출 취소 환불을 통해서만 가능합니다.</p>
-      <p><strong>취소 정책</strong></p>
-      <ul>
-        <li>배차 전: 전액 환불</li>
-        <li>기사 배정 후 취소 시: 배송비의 30% 차감 후 환불</li>
-        <li>기사 이동 시작 후: 취소 불가</li>
-        <li>판매자 귀책: 구매자 전액 환불</li>
-      </ul>
-      <p>① 배송 서비스 특성상 배차 완료 후에는 청약철회가 제한됩니다.</p>
-      <p>② 배차 전 취소는 전액 환불되며, 이는 전자상거래법 제17조에 따릅니다.</p>
-      <h3>제5조 분쟁 처리</h3>
-      <p>① 물건 배상 한도: 배송비의 10배 (최대 50만원)</p>
-      <p>② 고가 물품(30만원 이상) 배송 시 주문 전 반드시 물품 가격을 고객센터에 신고해야 합니다. 미신고 시 배상 한도(최대 50만원)가 적용되며 초과분은 보상하지 않습니다.</p>
-      <p>③ 배상 책임 면제 사유: 포장 불량 파손, 물품 고유의 하자, 천재지변, 수령인 부재로 인한 분실</p>
-      <p>④ 배상 청구는 배송 완료 후 24시간 이내 접수해야 합니다.</p>
-      <p>⑤ 분쟁 처리 기간: 접수 후 72시간 이내</p>
-      <h3>제6조 서비스 중단</h3>
-      <p>① 회사는 시스템 점검, 서버 장애, 천재지변 등의 사유로 서비스를 일시 중단할 수 있습니다.</p>
-      <p>② 예정된 점검은 최소 24시간 전 앱 내 공지 또는 카카오톡 채널을 통해 안내합니다.</p>
-      <p>③ 불가피한 긴급 중단의 경우 사후 고지할 수 있습니다.</p>
-      <h3>제7조 지적재산권</h3>
-      <p>① 앱 내 모든 콘텐츠(로고, 디자인, 텍스트 등)의 저작권은 회사에 귀속됩니다.</p>
-      <p>② 이용자는 회사의 사전 동의 없이 콘텐츠를 복제, 배포, 수정할 수 없습니다.</p>
-      <h3>제8조 제재</h3>
-      <ul>
-        <li>경고 3회: 7일 정지</li>
-        <li>경고 5회: 30일 정지</li>
-        <li>중대 위반: 즉시 영구 제한</li>
-      </ul>
-      <h3>제9조 고객센터</h3>
-      <p>카카오톡 채널: <a href="http://pf.kakao.com/_WxdmGX/chat" target="_blank" style="color:var(--red)">카카오톡 바로가기</a></p>
-      <p>운영시간: 평일 09시~18시 · 분쟁조정: 한국소비자원 1372</p>
-    </div>
-    <div class="modal-footer">
-      <div class="modal-footer-note">상호: 심부름 · 대표자: 박상현 · 사업자등록번호: 475-16-02902</div>
-      <button class="modal-confirm" onclick="closeModal('modal-terms')">확인</button>
-    </div>
-  </div>
-</div>
- 
-<!-- 개인정보처리방침 모달 -->
-<div class="modal-overlay" id="modal-privacy" onclick="closeModalOutside(event,'modal-privacy')">
-  <div class="modal-box">
-    <div class="modal-header">
-      <div class="modal-title">개인정보처리방침</div>
-      <button class="modal-close" onclick="closeModal('modal-privacy')">✕</button>
-    </div>
-    <div class="modal-body">
-      <h3>수집 항목</h3>
-      <ul>
-        <li>[필수] 휴대폰 번호, 이름 (탈퇴 후 30일 보관)</li>
-        <li>[필수] 배송/픽업 주소 (거래 완료 후 1년 보관)</li>
-        <li>[필수] 결제 수단 (5년, 전자상거래법)</li>
-        <li>[필수] GPS 위치 (앱 사용 중만 수집)</li>
-        <li>[선택] 프로필 사진 (탈퇴 시 삭제)</li>
-      </ul>
-      <h3>제3자 제공</h3>
-      <ul>
-        <li>배송 기사: 주소 + 전화번호 (배송 중만, 완료 후 즉시 삭제)</li>
-        <li>나이스페이먼츠: 결제 처리</li>
-        <li>카카오: 알림톡 발송</li>
-      </ul>
-      <h3>처리 위탁</h3>
-      <p>나이스페이먼츠, 카카오, AWS(Supabase), Google Firebase</p>
-      <h3>위치정보</h3>
-      <p>백그라운드 수집 없음 · 기록 6개월 보관</p>
-      <h3>보유 기간</h3>
-      <ul>
-        <li>계약/결제: 5년 (전자상거래법)</li>
-        <li>소비자 불만: 3년 (전자상거래법)</li>
-        <li>접속 로그: 3개월 (통신비밀보호법)</li>
-      </ul>
-      <h3>이용자 권리</h3>
-      <p>① 이용자는 언제든지 개인정보 열람, 수정, 삭제, 처리 정지를 요청할 수 있습니다.</p>
-      <p>② 요청은 카카오톡 채널 또는 이메일(simburoomgo@gmail.com)로 접수합니다.</p>
-      <p>③ 요청 접수 후 10일 이내 처리합니다.</p>
-      <h3>개인정보 보호책임자</h3>
-      <p>성명: 박상현 · 직책: 대표 · 연락처: simburoomgo@gmail.com</p>
-      <p>침해 신고: 개인정보보호위원회 182</p>
-    </div>
-    <div class="modal-footer">
-      <div class="modal-footer-note">상호: 심부름 · 대표자: 박상현 · 사업자등록번호: 475-16-02902</div>
-      <button class="modal-confirm" onclick="closeModal('modal-privacy')">확인</button>
-    </div>
-  </div>
-</div>
- 
-<!-- 위치정보 수집 동의 모달 -->
-<div class="modal-overlay" id="modal-location" onclick="closeModalOutside(event,'modal-location')">
-  <div class="modal-box">
-    <div class="modal-header">
-      <div class="modal-title">위치정보 수집 동의</div>
-      <button class="modal-close" onclick="closeModal('modal-location')">✕</button>
-    </div>
-    <div class="modal-body">
-      <h3>수집 목적</h3>
-      <p>주문 시 서비스 가능 지역 확인 및 기사님 매칭을 위해 위치정보를 수집합니다.</p>
-      <h3>수집 항목</h3>
-      <ul>
-        <li>GPS 기반 현재 위치 (위도, 경도)</li>
-        <li>주소 입력 시 좌표 변환 정보</li>
-      </ul>
-      <h3>수집 시점</h3>
-      <p>앱 사용 중에만 수집되며, 백그라운드에서는 수집되지 않습니다.</p>
-      <h3>보유 기간</h3>
-      <p>위치 기록: 6개월 보관 후 자동 삭제</p>
-      <h3>제3자 제공</h3>
-      <p>배송 기사에게 픽업/배송 주소 제공 (배송 완료 후 즉시 삭제)</p>
-      <h3>거부 권리</h3>
-      <p>위치정보 수집에 동의하지 않을 경우 서비스 이용이 제한될 수 있습니다. 동의 후에도 기기 설정에서 언제든지 위치 권한을 철회할 수 있습니다.</p>
-      <h3>문의</h3>
-      <p>카카오톡 채널: <a href="http://pf.kakao.com/_WxdmGX/chat" target="_blank" style="color:var(--red)">카카오톡 바로가기</a></p>
-      <p>이메일: simburoomgo@gmail.com</p>
-    </div>
-    <div class="modal-footer">
-      <div class="modal-footer-note">상호: 심부름 · 대표자: 박상현 · 사업자등록번호: 475-16-02902</div>
-      <button class="modal-confirm" onclick="closeModal('modal-location')">확인</button>
-    </div>
-  </div>
-</div>
- 
 </body>
 <script src="https://pay.nicepay.co.kr/v1/js/"></script>
 <script>
-function openModal(id){document.getElementById('modal-'+id).classList.add('open');document.body.style.overflow='hidden'}
-function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow=''}
-function closeModalOutside(e,id){if(e.target.id===id)closeModal(id)}
- 
 function selectCharge(el){
   document.querySelectorAll('.charge-card').forEach(c=>c.classList.remove('selected'));
   el.classList.add('selected');
