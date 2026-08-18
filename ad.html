@@ -3,6 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Danggeun Market Code -->
+<script>
+  (function (w, d) {
+    if (w.karrotPixel) return;
+    var k = { stub: true, queue: [] };
+    k.init = function () { k.queue.push(['init', arguments, Date.now()]); };
+    k.track = function () { k.queue.push(['track', arguments, Date.now()]); };
+    w.karrotPixel = k;
+    var s = d.createElement('script');
+    s.async = true;
+    s.src = 'https://karrot-pixel.business.daangn.com/karrot-pixel.js';
+    var f = d.getElementsByTagName('script')[0];
+    f && f.parentNode ? f.parentNode.insertBefore(s, f) : d.head.appendChild(s);
+  })(window, document);
+  window.karrotPixel.init('1787043772493488001');
+  window.karrotPixel.track('ViewPage');
+</script>
+<!-- End Danggeun Market Code -->
 <title>심부름 — 직접 안 가도 돼요</title>
 <meta name="description" content="문고리 거래, 직접 가지 않으셔도 됩니다. 검증된 심부름 기사가 픽업부터 문 앞 배송까지 안전하게. 신청 단 30초, 1시간 내 배송 완료. 3,900원부터.">
 <meta property="og:title" content="심부름 — 직접 안 가도 돼요">
@@ -213,6 +231,38 @@
     var ua=navigator.userAgent||'';
     var cls=/iPhone|iPad|iPod/i.test(ua)?'ios':(/Android/i.test(ua)?'android':'');
     if(cls){document.getElementById('ctaTop').classList.add(cls);document.getElementById('ctaBottom').classList.add(cls);}
+  })();
+</script>
+<script>
+  /* ── 당근 광고 전환추적 보조 ──────────────────────────────────────────
+     ① utm 파라미터 수신 → Android 스토어 링크에 install referrer 부착
+     ② 스토어 버튼 클릭을 Lead 전환으로 전송
+     위 UA 판별 스크립트와는 독립이다(그쪽은 class만 건드리고, 여긴 href/click만 다룸). */
+  (function(){
+    var UTM_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+    var qs = new URLSearchParams(location.search);
+    var pairs = [];
+    UTM_KEYS.forEach(function(k){
+      var v = qs.get(k);
+      if (v) pairs.push(k + '=' + v);   // 값이 빈 파라미터는 제외
+    });
+    var referrer = pairs.join('&');
+
+    // Android만 부착한다. iOS(App Store)는 Install Referrer가 없어 원본 링크 그대로 둔다.
+    // utm이 하나도 없으면 referrer를 붙이지 않는다.
+    if (referrer) {
+      var enc = encodeURIComponent(referrer);
+      Array.prototype.forEach.call(document.querySelectorAll('a.android-btn'), function(a){
+        if (a.href.indexOf('referrer=') === -1) a.href = a.href + '&referrer=' + enc;
+      });
+    }
+
+    // 스토어로 나가는 클릭 = 관심고객(Lead). target="_blank"라 이동을 막지 않는다.
+    Array.prototype.forEach.call(document.querySelectorAll('#ctaTop a.store, #ctaBottom a.store'), function(a){
+      a.addEventListener('click', function(){
+        try { window.karrotPixel && window.karrotPixel.track('Lead'); } catch (e) {}
+      });
+    });
   })();
 </script>
 </body>
