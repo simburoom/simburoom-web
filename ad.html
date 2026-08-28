@@ -247,6 +247,9 @@
       if (v) pairs.push(k + '=' + v);   // 값이 빈 파라미터는 제외
     });
     var referrer = pairs.join('&');
+    if (!referrer && qs.get('kmckid')) {
+      referrer = 'utm_source=daangn&utm_medium=cpc&utm_campaign=danggeun_1st';
+    }
 
     // Android만 부착한다. iOS(App Store)는 Install Referrer가 없어 원본 링크 그대로 둔다.
     // utm이 하나도 없으면 referrer를 붙이지 않는다.
