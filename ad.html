@@ -111,7 +111,7 @@
   footer{padding:28px 20px 40px;text-align:center;color:#9a9a9a;font-size:12px;line-height:1.9;}
   footer .links{margin:10px 0;}
   footer .links span{margin:0 6px;color:#c4c4c4;}
-  /* ===== 쿠폰 (2026-08 주말 이벤트) =====
+  /* ===== 쿠폰 (2026-08 이벤트) =====
      [롤백] 쿠폰을 내리려면 아래 한 줄의 주석만 풀면 된다.
      나머지 수정(배송시간 문구 통일 / 노원구 명시)은 그대로 유지된다.
      .cpn, .cpn-sec { display:none !important; }
@@ -157,6 +157,7 @@
     padding:13px 15px;font-size:14px;color:#5A4A20;line-height:1.6;margin-top:14px;
   }
   .cpn-warn b{color:var(--ink);}
+  .cpn-note{margin-top:14px;font-size:13px;color:var(--gray);text-align:center;line-height:1.6;word-break:keep-all;}
 </style>
 </head>
 <body>
@@ -180,8 +181,8 @@
     </div>
     <!-- ===== 쿠폰 배너 ===== -->
     <div class="cpn">
-      <span class="tag">이번 주말 선착순 10명</span>
-      <div class="hl">첫 배송비 <b>2,900원</b> 지원</div>
+      <span class="tag">쿠폰 수량 소진 시 조기 마감</span>
+      <div class="hl">당근 이웃님 첫 배송비 지원 · <b>2,900원</b></div>
       <div class="code-row">
         <div class="code">NOWON2900</div>
         <button type="button" onclick="copyCoupon(this)">복사</button>
@@ -244,6 +245,7 @@
       <button type="button" onclick="copyCoupon(this)">복사</button>
     </div>
     <div class="cpn-warn">⚠️ 충전 화면에서 <b>직접 입력</b>을 눌러 <b>1,000원</b>만 넣으면<br>배송비 3,900원이 채워집니다</div>
+    <p class="cpn-note">※ 한정 수량으로 제공되며, 소진 시 예고 없이 종료될 수 있습니다.</p>
   </div>
 </section>
 
